@@ -7,9 +7,9 @@ Change file name for encryption.
 
 import random
 
-WORDS = ("abcdefghijkmnopqrstuvwxyz"
-         "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789"
-         "_-~")
+WORDS = ('abcdefghijkmnopqrstuvwxyz'
+         'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789'
+         '_-~')
 
 
 def change(filename, min_word=5, max_word=10, min_class=3, max_class=6):
