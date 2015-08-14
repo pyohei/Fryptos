@@ -20,8 +20,8 @@ def main(conf_path='conf/conf.ini'):
     anchor = Anchor('text')
     for org_f in __read_files(conf.get('directory', 'file_top')):
         cur_f = anchor.load_cur(org_f)
-        enc_f = __make_public_dir(conf.get('directory', 'public_dir',
-                                           __encrypt_file(org_f, anchor)))
+        enc_f = __make_public_dir(conf.get('directory', 'public_dir'),
+                                           __encrypt_file(org_f, anchor))
         __move(org_f, enc_f)
         anchor.change(cur_f, enc_f)
         if os.path.exists(cur_f):
@@ -29,7 +29,7 @@ def main(conf_path='conf/conf.ini'):
 
 
 def __read_files(file_path):
-    files = glob.glob(file_path)
+    files = glob.glob(file_path + '/*')
     for f in files:
         if os.path.isdir(f):
             continue
@@ -38,8 +38,8 @@ def __read_files(file_path):
 
 def __encrypt_file(fname, anchor):
     f = filename.change(fname)
-    if anchor.haq(f):
-        __encrypt_file(filename)
+    if anchor.has(f):
+        __encrypt_file(fname)
     return f
 
 
@@ -48,9 +48,14 @@ def __make_public_dir(public_dir, file_path):
 
 
 def __move(org_f, enc_f):
-    os.makedirs(os.path.join(enc_f.split('/')[0:-1]))
+    print enc_f
+    os.makedirs('/'.join(enc_f.split('/')[0:-1]))
     shutil.copy(org_f, enc_f)
 
 
 def __delete(cur_f):
-    shutil.rmtree(cur_f.split('/')[0])
+    #shutil.rmtree(cur_f.split('/')[0])
+
+
+if __name__ == '__main__':
+    main()

@@ -46,7 +46,7 @@ class Text(object):
     def __save(self):
         tmp_file = self.file_path + '.org'
         with open(tmp_file, 'w') as f:
-            pickle.dump(f, self.anchors)
+            pickle.dump(self.anchors, f)
         self.__change_file(tmp_file)
 
     def __change_file(self, tmp_file):
