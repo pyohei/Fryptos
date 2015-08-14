@@ -8,20 +8,18 @@
 class Anchor(object):
 
     def __init__(self, anc_way):
-        pass
+        if anc_way == 'text':
+            from text import Text as Record
+        self.anchor = Record()
 
     def has(self, filename):
         """Check encrypt file name."""
-        pass
+        return self.anchor.has(filename)
 
     def load_cur(self, filename):
         """Load current encrypted filename"""
-        pass
-
-    def put(self, org_filename, enc_filename):
-        """Put filename into anchor"""
-        pass
+        return self.anchor.load_cur(filename)
 
     def change(self, org, dst):
         """Change anchor"""
-        pass
+        self.anchor.change(org, dst)
