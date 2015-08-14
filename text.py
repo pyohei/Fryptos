@@ -19,6 +19,8 @@ class Text(object):
         self.__load_encrypt_words()
 
     def __load(self):
+        if not os.path.exists(self.file_path):
+            return
         with open(self.file_path, 'r') as f:
             self.anchors = pickle.load(f)
 
