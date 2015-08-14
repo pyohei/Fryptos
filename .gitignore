@@ -1,0 +1,3 @@
+*.pyc
+anc*
+demo/dst/*
