@@ -13,11 +13,20 @@ class Text(object):
 
     def __init__(self, file_path='anc.txt'):
         self.file_path = file_path
-        self.anchors = self.__load()
+        self.anchors = {}
+        self.__load()
+        self.encrypted_words = []
+        self.__load_encrypt_words()
 
     def __load(self):
         with open(self.file_path, 'r') as f:
             self.anchors = pickle.load(f)
+
+    def __load_encrypt_words(self):
+        words = []
+        for w in self.anchors.values():
+            words += w.split('/')
+        self.encrypted_words = words
 
     def has(self, org_file):
         return org_file in self.anchors
@@ -32,7 +41,7 @@ class Text(object):
             self.__load()
         except Exception as e:
             print e
-            return
+            raise
 
     def __save(self):
         tmp_file = self.file_path + '.org'
@@ -42,5 +51,6 @@ class Text(object):
 
     def __change_file(self, tmp_file):
         bk_file = self.file_path + '.bk'
-        os.rename(self.file_path, bk_file)
+        if os.path.exists(self.file_path):
+            os.rename(self.file_path, bk_file)
         os.rename(tmp_file, self.file_path)
