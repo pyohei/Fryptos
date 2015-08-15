@@ -11,8 +11,8 @@ import pickle
 
 class Text(object):
 
-    def __init__(self, file_path='anc.txt'):
-        self.file_path = file_path
+    def __init__(self, settings):
+        self.file_path = settings.get('ancfile_path', 'anc.txt')
         self.anchors = {}
         self.__load()
         self.encrypted_words = []
