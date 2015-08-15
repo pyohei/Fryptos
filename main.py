@@ -11,13 +11,14 @@ import glob
 import os
 import shutil
 import filename
-from anchor import Anchor
+from anchor.anchor import Anchor
 
 
-def main(conf_path='conf/conf.ini'):
+def main(conf_path='conf/conf.ini', anc_type='text'):
     conf = ConfigParser.RawConfigParser()
     conf.read(conf_path)
-    anchor = Anchor('text')
+    anchor = __load_anchor(conf, anc_type)
+#    anchor = Anchor('text')
     for org_f in __read_files(conf.get('directory', 'file_top')):
         cur_f = anchor.load_cur(org_f)
         enc_f = __make_public_dir(conf.get('directory', 'public_dir'),
@@ -27,6 +28,16 @@ def main(conf_path='conf/conf.ini'):
         if cur_f and os.path.exists(cur_f):
             __delete(conf.get('directory', 'public_dir'),
                      cur_f)
+
+
+def __load_anchor(config, anc_type):
+    settings = __load_anc_settings(config, anc_type)
+    return Anchor(anc_type, settings)
+
+
+def __load_anc_settings(config, anc_type):
+    settings = config.items(anc_type)
+    return dict(settings)
 
 
 def __read_files(file_path):
