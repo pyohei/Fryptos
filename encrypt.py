@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Encrypt stirng
 
 This module supply the encryption of the string.

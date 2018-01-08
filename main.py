@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """File encrypt.
 
 Put files to public directory by encryption.

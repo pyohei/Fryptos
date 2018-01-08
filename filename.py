@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """File name operation.
 
 Change file name for encryption.
