@@ -2,3 +2,5 @@
 anc.*
 demo/dst/*
 tmp/*
+
+.DS_Store
