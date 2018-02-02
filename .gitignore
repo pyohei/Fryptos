@@ -4,3 +4,4 @@ demo/dst/*
 tmp/*
 
 .DS_Store
+sample/*
