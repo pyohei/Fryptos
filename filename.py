@@ -18,14 +18,14 @@ def change(filename, min_word=5, max_word=10, min_class=3, max_class=6):
     dir_class_len = random.randint(min_class, max_class)
     dir_names = []
     for n in range(dir_class_len):
-        dir_names.append(__generate_random(min_word, max_word))
+        dir_names.append(_generate_random(min_word, max_word))
     return '/'.join(dir_names) + '.' + extention
 
 
-def __generate_random(min_word=5, max_word=10):
+def _generate_random(min_word=5, max_word=10):
     """Generate random string.
 
-    >> __generate_random(5, 10) == __generate_random(5, 10)
+    >> _generate_random(5, 10) == _generate_random(5, 10)
     False
     """
     word_len = random.randrange(min_word, max_word)

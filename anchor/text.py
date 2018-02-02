@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Text manager.
 
 Supply text operations.
