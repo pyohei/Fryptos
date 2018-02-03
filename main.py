@@ -24,24 +24,26 @@ def main(conf_path='conf/conf.ini', anc_type='text'):
     anchor = _load_anchor(conf, anc_type)
     # Read target file
     for org_f in _read_files(conf.get('directory', 'file_top')):
+        # Setting path
         cur_f = anchor.load_cur(org_f)
         enc_f = _make_dest_dir(conf.get('directory', 'public_dir'),
                                   _encrypt_file(org_f, anchor))
-        _move(org_f, enc_f)
+        # Copy
+        _copy(org_f, enc_f)
+        # Write change log
+        # TODO: need transaction?
         anchor.change(org_f, enc_f)
+        # Delete file if exists.
         if cur_f and os.path.exists(cur_f):
             _delete(conf.get('directory', 'public_dir'),
                      cur_f)
+    # TODO: Check old file.?
 
 
 def _load_anchor(config, anc_type):
-    settings = __load_anc_settings(config, anc_type)
+    """Load anchor object."""
+    settings = dict(config.items(anc_type))
     return Anchor(anc_type, settings)
-
-
-def __load_anc_settings(config, anc_type):
-    settings = config.items(anc_type)
-    return dict(settings)
 
 
 def _read_files(file_path):
@@ -66,7 +68,7 @@ def _make_dest_dir(public_dir, file_path):
     return os.path.join(public_dir, file_path)
 
 
-def _move(org_f, enc_f):
+def _copy(org_f, enc_f):
     """Copy source file into destination file."""
     os.makedirs('/'.join(enc_f.split('/')[0:-1]))
     shutil.copy(org_f, enc_f)
