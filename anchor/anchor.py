@@ -1,11 +1,13 @@
-"""Anchor of file.
-
-"""
-
+"""Anchor object.""" 
 
 class Anchor(object):
 
     def __init__(self, anc_way, settings={}):
+        """Initialize object.
+
+        If you want to extend anchor function,
+        you must add new anc_way and new module.
+        """
         if anc_way == 'text':
             from text import Text as Record
         self.anchor = Record(settings)
