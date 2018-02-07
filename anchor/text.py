@@ -9,6 +9,7 @@ import pickle
 
 
 class Text(object):
+    """Text anchor object."""
 
     def __init__(self, settings):
         self.file_path = settings.get('ancfile_path', 'anc.txt')
@@ -23,6 +24,7 @@ class Text(object):
         self._load_encrypt_words()
 
     def _load(self):
+        """Load anchor line."""
         if not os.path.exists(self.file_path):
             return
         with open(self.file_path, 'r') as f:
@@ -66,7 +68,6 @@ class Text(object):
             w.writeheader()
             for k, v in self.anchors.items():
                 w.writerow({'source': k, 'destination': v})
-
         self.__change_file(tmp_file)
 
     def __change_file(self, tmp_file):
