@@ -14,7 +14,7 @@ class Text(object):
     def __init__(self, settings):
         self.file_path = settings.get('ancfile_path', 'anc.txt')
         # New saving file(tsv).
-        self.path = settings.get('ancfile_path', 'anc.tsv')
+        self.path = settings.get('ancfile_path', 'anc.csv')
         print self.path
         self.anchors = {}
         # New anchor
