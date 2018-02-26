@@ -81,4 +81,21 @@ def _delete(public_dir, cur_f):
 
 
 if __name__ == '__main__':
+    # TODO: add usage
+    import argparse
+    from os.path import expanduser
+    home_dir = expanduser('~')
+    p = argparse.ArgumentParser(description='Encrypt your files.')
+    p.add_argument('source')
+    p.add_argument('target')
+    p.add_argument('-f', '--file', default=home_dir, type=str)
+    p.print_usage()
+
+    args = p.parse_args()
+    src = str(args.source)
+    tgt = str(args.target)
+    f = str(args.file)
+    
+    print(src, tgt, f)
+    exit()
     main()
