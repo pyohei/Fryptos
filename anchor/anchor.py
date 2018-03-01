@@ -1,4 +1,9 @@
-"""Anchor object.""" 
+"""Anchor base object.
+
+This class is base adaptor of Anchor.
+If you want to append anothor anchor type, you should make new module.
+After that you add `import` statement in `__init__` process.
+""" 
 
 class Anchor(object):
 
