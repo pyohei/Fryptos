@@ -11,10 +11,10 @@ import pickle
 class Text(object):
     """Text anchor object."""
 
-    def __init__(self, settings):
-        self.file_path = settings.get('ancfile_path', 'anc.txt')
+    def __init__(self):
+        self.file_path = 'anchor.txt'
         # New saving file(tsv).
-        self.path = settings.get('ancfile_path', 'anc.csv')
+        self.path = 'anchor.csv'
         print self.path
         self.anchors = {}
         # New anchor

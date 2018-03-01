@@ -2,7 +2,7 @@
 
 class Anchor(object):
 
-    def __init__(self, anc_way, settings={}):
+    def __init__(self, anc_way):
         """Initialize object.
 
         If you want to extend anchor function,
@@ -10,7 +10,7 @@ class Anchor(object):
         """
         if anc_way == 'text':
             from text import Text as Record
-        self.anchor = Record(settings)
+        self.anchor = Record()
 
     def has(self, filename):
         """Check encrypt file name."""

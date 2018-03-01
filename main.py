@@ -4,7 +4,6 @@ Put files to public directory by encryption.
 And this anchers of relationship.
 This module anable change the anchers.
 """
-import ConfigParser
 import glob
 import os
 import shutil
@@ -12,22 +11,18 @@ import filename
 from anchor.anchor import Anchor
 
 
-def main(conf_path='conf/conf.ini', anc_type='text'):
+def main(src, target, f):
     """Main script of this code."""
     # TODO
     #   Check ini file have correct values.
 
-    # Load configuration.
-    conf = ConfigParser.RawConfigParser()
-    conf.read(conf_path)
     # Ancker set
-    anchor = _load_anchor(conf, anc_type)
+    anchor = Anchor('text')
     # Read target file
-    for org_f in _read_files(conf.get('directory', 'file_top')):
+    for org_f in _read_files(src):
         # Setting path
         cur_f = anchor.load_cur(org_f)
-        enc_f = _make_dest_dir(conf.get('directory', 'public_dir'),
-                                  _encrypt_file(org_f, anchor))
+        enc_f = _make_dest_dir(target, _encrypt_file(org_f, anchor))
         # Copy
         _copy(org_f, enc_f)
         # Write change log
@@ -35,15 +30,8 @@ def main(conf_path='conf/conf.ini', anc_type='text'):
         anchor.change(org_f, enc_f)
         # Delete file if exists.
         if cur_f and os.path.exists(cur_f):
-            _delete(conf.get('directory', 'public_dir'),
-                     cur_f)
+            _delete(target, cur_f)
     # TODO: Check old file.?
-
-
-def _load_anchor(config, anc_type):
-    """Load anchor object."""
-    settings = dict(config.items(anc_type))
-    return Anchor(anc_type, settings)
 
 
 def _read_files(file_path):
@@ -97,5 +85,4 @@ if __name__ == '__main__':
     f = str(args.file)
     
     print(src, tgt, f)
-    exit()
-    main()
+    main(src, tgt, f)
