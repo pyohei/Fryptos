@@ -1,8 +1,30 @@
-# encryptfile
+# Fryptos
+
+Fryptos is tool to encrypt file name.  
 
 ## ABOUT
-Encrypt image file for public server.  
-This plugin can encrypt file name and put public directory.  
+
+With this tool, you can encrypt file name like below.  
+
+before
+
+```
+```
+
+after
+
+```
+```
+
+## INSTALL
+
+## USAGE
+
+## MISC
+
+This repository name is originated from the word of Kryptos which means encrypt in Greek.  
+Fryptos is my original word of file + Kryptos.  from the word of
 
 ## LICENCE
-MIT
+
+* MIT
