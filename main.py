@@ -11,19 +11,17 @@ import shutil
 import filename
 from anchor.anchor import Anchor
 
+# TODO: Change print debug into logging module
 
 def main(src, dst):
     """Main script of this code."""
-    # TODO
-    #   Check ini file have correct values.
-
-    # Ancker set
     anchor = Anchor('text')
     # Read target file
     for org_f in _read_files(src):
         # Setting path
         cur_f = anchor.load_cur(org_f)
         enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
+        print('cur: {0}, enc: {1}'.format(cur_f, enc_f))
         # Copy
         _copy(org_f, enc_f)
         # Write change log
@@ -63,10 +61,12 @@ def _copy(org_f, enc_f):
     shutil.copy(org_f, enc_f)
 
 
-def _delete(public_dir, cur_f):
-    """Delete encrypt file"""
-    delete_path = cur_f.replace(public_dir+'/', '')
-    shutil.rmtree(os.path.join(public_dir, delete_path.split('/')[0]))
+def _delete(dst_dir, cur_f):
+    """Delete old encrypt file"""
+    delete_base_path = cur_f.replace(dst_dir.rstrip('/')+'/', '')
+    delete_path = os.path.join(dst_dir, delete_base_path.split('/')[0])
+    shutil.rmtree(delete_path)
+    print('Delete directory: {}'.format(delete_path))
 
 
 if __name__ == '__main__':
