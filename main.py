@@ -5,13 +5,14 @@ And this anchers of relationship.
 This module anable change the anchers.
 """
 import glob
+import logging
 import os
 import shutil
 import filename
 from anchor.anchor import Anchor
 
 
-def main(src, target, f):
+def main(src, dst):
     """Main script of this code."""
     # TODO
     #   Check ini file have correct values.
@@ -22,7 +23,7 @@ def main(src, target, f):
     for org_f in _read_files(src):
         # Setting path
         cur_f = anchor.load_cur(org_f)
-        enc_f = _make_dest_dir(target, _encrypt_file(org_f, anchor))
+        enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
         # Copy
         _copy(org_f, enc_f)
         # Write change log
@@ -30,7 +31,7 @@ def main(src, target, f):
         anchor.change(org_f, enc_f)
         # Delete file if exists.
         if cur_f and os.path.exists(cur_f):
-            _delete(target, cur_f)
+            _delete(dst, cur_f)
     # TODO: Check old file.?
 
 
@@ -69,20 +70,23 @@ def _delete(public_dir, cur_f):
 
 
 if __name__ == '__main__':
-    # TODO: add usage
     import argparse
     from os.path import expanduser
+    from os.path import isdir
+
     home_dir = expanduser('~')
-    p = argparse.ArgumentParser(description='Encrypt your files.')
-    p.add_argument('source')
-    p.add_argument('target')
-    p.add_argument('-f', '--file', default=home_dir, type=str)
-    p.print_usage()
+    p = argparse.ArgumentParser(description='Encrypt files.')
+    # source and destination is necessary argument.
+    p.add_argument('source', help='Source directory')
+    p.add_argument('destination', help='destination of encrypttion.')
+    #logging.debug(p.print_usage())
 
     args = p.parse_args()
     src = str(args.source)
-    tgt = str(args.target)
-    f = str(args.file)
+    dst = str(args.destination)
+
+    if not (isdir(src) and isdir(dst)):
+        print 'No such directory.'
+        quit()
     
-    print(src, tgt, f)
-    main(src, tgt, f)
+    main(src, dst)
