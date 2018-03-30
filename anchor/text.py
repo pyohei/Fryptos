@@ -12,8 +12,6 @@ class Text(object):
     """Text anchor object."""
 
     def __init__(self):
-        self.file_path = 'anchor.txt'
-        # New saving file(tsv).
         self.path = 'anchor.csv'
         print self.path
         self.anchors = {}
@@ -25,11 +23,9 @@ class Text(object):
 
     def _load(self):
         """Load anchor line."""
-        if not os.path.exists(self.file_path):
+        if not os.path.exists(self.path):
             return
-        with open(self.file_path, 'r') as f:
-            self.anchors = pickle.load(f)
-        with open(self.path + '.tsv', 'r') as ff:
+        with open(self.path, 'r') as ff:
             self.new_anchors = csv.DictReader(ff)
             a = {}
             for n in self.new_anchors:
@@ -60,18 +56,8 @@ class Text(object):
             raise
 
     def _save(self):
-        tmp_file = self.file_path + '.org'
-        with open(tmp_file, 'w') as f:
-            pickle.dump(self.anchors, f)
-        with open(self.path + '.tsv', 'w') as ff:
+        with open(self.path, 'w') as ff:
             w = csv.DictWriter(ff, fieldnames=['source', 'destination'])
             w.writeheader()
             for k, v in self.anchors.items():
                 w.writerow({'source': k, 'destination': v})
-        self.__change_file(tmp_file)
-
-    def __change_file(self, tmp_file):
-        bk_file = self.file_path + '.bk'
-        if os.path.exists(self.file_path):
-            os.rename(self.file_path, bk_file)
-        os.rename(tmp_file, self.file_path)
