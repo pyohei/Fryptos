@@ -15,6 +15,7 @@ from anchor.anchor import Anchor
 
 def main(src, dst):
     """Main script of this code."""
+    logging.debug('hoge')
     anchor = Anchor('text')
     # Read target file
     for org_f in _read_files(src):
@@ -79,7 +80,8 @@ if __name__ == '__main__':
     # source and destination is necessary argument.
     p.add_argument('source', help='Source directory')
     p.add_argument('destination', help='destination of encrypttion.')
-    #logging.debug(p.print_usage())
+    # debug mode.
+    p.add_argument('-v', help='Verbose mode.', dest='verbose', action='count', default=0)
 
     args = p.parse_args()
     src = str(args.source)
@@ -89,4 +91,10 @@ if __name__ == '__main__':
         print 'No such directory.'
         quit()
     
+    verbose = args.verbose
+    if isinstance(verbose, int) and verbose > 0:
+        log_format = '%(asctime) %(message)'
+        logging.basicConfig(level=10, format=log_format)
+        logging.warning('test')
+
     main(src, dst)
