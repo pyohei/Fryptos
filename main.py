@@ -11,7 +11,6 @@ import shutil
 import filename
 from anchor.anchor import Anchor
 
-# TODO: Change print debug into logging module
 
 def main(src, dst):
     """Main script of this code."""
@@ -20,17 +19,14 @@ def main(src, dst):
     for org_f in _read_files(src):
         cur_f = anchor.request_current_path(org_f)
         enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
+
         logging.debug('cur: {0}, enc: {1}'.format(cur_f, enc_f))
 
-        # TODO: need transaction?
-        # Copy
+        # TODO: Add transaction process.
         _copy(org_f, enc_f)
-        # Write change log
-        anchor.change(org_f, enc_f)
-        # Delete file if exists.
+        anchor.change(org_f, enc_f) # Write the change to anchor file
         if cur_f and os.path.exists(cur_f):
             _delete(dst, cur_f)
-    # TODO: Check old file.?
 
 
 def _read_files(file_path):
@@ -44,9 +40,11 @@ def _read_files(file_path):
 
 def _encrypt_file(fname, anchor):
     """Encrypt file name"""
+    # TODO: anchor object refere original path, so I can not check existing of 
+    #       encrypt file. And I need to change to look encrypt file in 'has' func.
     f = filename.change(fname)
     if anchor.has(f):
-        _encrypt_file(fname)
+        _encrypt_file(fname, anchor)
     return f
 
 
