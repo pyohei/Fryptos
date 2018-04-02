@@ -2,7 +2,7 @@
 from distutils.core import setup
 
 setup(name="fryptos",
-      version='1.0.0',
+      version='0.0.1',
       description='Encrypt files.',
       author='Shohei Mukai',
       author_email='mukaishohei76@gmail.com',
