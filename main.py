@@ -15,10 +15,10 @@ from anchor.anchor import Anchor
 
 def main(src, dst):
     """Main script of this code."""
+    # Currently, you can use only `text` type ;)
     anchor = Anchor('text')
-    # Read target file
     for org_f in _read_files(src):
-        cur_f = anchor.load_cur(org_f)
+        cur_f = anchor.request_current_path(org_f)
         enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
         logging.debug('cur: {0}, enc: {1}'.format(cur_f, enc_f))
 

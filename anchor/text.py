@@ -13,26 +13,25 @@ class Text(object):
 
     def __init__(self):
         self.path = 'anchor.csv'
-        self.anchors = {}
-        self._load()
+        self.anchors = self._load()
+        print self.anchors
 
     def _load(self):
         """Load anchor line."""
         if not os.path.exists(self.path):
             return
         with open(self.path, 'r') as ff:
-            self.anchors = csv.DictReader(ff)
             a = {}
-            for n in self.anchors:
+            for n in csv.DictReader(ff):
                 a[n['source']] = n['destination']
-        self.anchors = a
+        return a
+
+    def request_current_path(self, org_file):
+        """Get current encrypt file path."""
+        return self.anchors.get(org_file, None)
 
     def has(self, org_file):
         return org_file in self.anchors
-
-    def load_cur(self, org_file):
-        print self.anchors
-        return self.anchors.get(org_file, None)
 
     def change(self, org_file, enc_file):
         self.anchors[org_file] = enc_file

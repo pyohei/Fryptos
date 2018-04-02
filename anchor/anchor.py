@@ -21,9 +21,9 @@ class Anchor(object):
         """Check encrypt file name."""
         return self.anchor.has(filename)
 
-    def load_cur(self, filename):
+    def request_current_path(self, filename):
         """Load current encrypted filename"""
-        return self.anchor.load_cur(filename)
+        return self.anchor.request_current_path(filename)
 
     def change(self, org, dst):
         """Change anchor"""
