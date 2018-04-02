@@ -13,7 +13,6 @@ class Text(object):
 
     def __init__(self):
         self.path = 'anchor.csv'
-        print self.path
         self.anchors = {}
         # New anchor
         self.new_anchors = {}
@@ -30,12 +29,10 @@ class Text(object):
             a = {}
             for n in self.new_anchors:
                 a[n['source']] = n['destination']
-        print "]]]]"
-        print self.anchors == a
-        print "]]]]"
 
     def _load_encrypt_words(self):
         words = []
+        print self.anchors
         for w in self.anchors.values():
             words += w.split('/')
         self.encrypted_words = words

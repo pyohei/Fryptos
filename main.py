@@ -15,18 +15,17 @@ from anchor.anchor import Anchor
 
 def main(src, dst):
     """Main script of this code."""
-    logging.debug('hoge')
     anchor = Anchor('text')
     # Read target file
     for org_f in _read_files(src):
-        # Setting path
         cur_f = anchor.load_cur(org_f)
         enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
-        print('cur: {0}, enc: {1}'.format(cur_f, enc_f))
+        logging.debug('cur: {0}, enc: {1}'.format(cur_f, enc_f))
+
+        # TODO: need transaction?
         # Copy
         _copy(org_f, enc_f)
         # Write change log
-        # TODO: need transaction?
         anchor.change(org_f, enc_f)
         # Delete file if exists.
         if cur_f and os.path.exists(cur_f):
@@ -67,7 +66,7 @@ def _delete(dst_dir, cur_f):
     delete_base_path = cur_f.replace(dst_dir.rstrip('/')+'/', '')
     delete_path = os.path.join(dst_dir, delete_base_path.split('/')[0])
     shutil.rmtree(delete_path)
-    print('Delete directory: {}'.format(delete_path))
+    logging.debug('Delete directory: {}'.format(delete_path))
 
 
 if __name__ == '__main__':
@@ -93,8 +92,7 @@ if __name__ == '__main__':
     
     verbose = args.verbose
     if isinstance(verbose, int) and verbose > 0:
-        log_format = '%(asctime) %(message)'
+        log_format = '%(asctime)s\t[%(levelname)s]\t%(message)s'
         logging.basicConfig(level=10, format=log_format)
-        logging.warning('test')
 
     main(src, dst)
