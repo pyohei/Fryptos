@@ -14,33 +14,24 @@ class Text(object):
     def __init__(self):
         self.path = 'anchor.csv'
         self.anchors = {}
-        # New anchor
-        self.new_anchors = {}
         self._load()
-        self.encrypted_words = []
-        self._load_encrypt_words()
 
     def _load(self):
         """Load anchor line."""
         if not os.path.exists(self.path):
             return
         with open(self.path, 'r') as ff:
-            self.new_anchors = csv.DictReader(ff)
+            self.anchors = csv.DictReader(ff)
             a = {}
-            for n in self.new_anchors:
+            for n in self.anchors:
                 a[n['source']] = n['destination']
-
-    def _load_encrypt_words(self):
-        words = []
-        print self.anchors
-        for w in self.anchors.values():
-            words += w.split('/')
-        self.encrypted_words = words
+        self.anchors = a
 
     def has(self, org_file):
         return org_file in self.anchors
 
     def load_cur(self, org_file):
+        print self.anchors
         return self.anchors.get(org_file, None)
 
     def change(self, org_file, enc_file):
@@ -49,8 +40,9 @@ class Text(object):
             self._save()
             self._load()
         except Exception as e:
-            print e
-            raise
+            import logging
+            logging.critical(e)
+            raise SystemError
 
     def _save(self):
         with open(self.path, 'w') as ff:
