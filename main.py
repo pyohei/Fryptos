@@ -19,11 +19,14 @@ def main(src, dst):
     for org_f in _read_files(src):
         cur_f = anchor.request_current_path(org_f)
         # WARNING: Theoritically, encrypted files have very low possibility which 
-        #          have collision file name, and this script does not check duplicate 
+        #          have collision file name, and this script does not check duplication of
         #          file name.
         enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
 
-        logging.debug('cur: {0}, enc: {1}'.format(cur_f, enc_f))
+        logging.debug('---')
+        logging.debug('Original: {0}'.format(org_f))
+        logging.debug('Current: {0}'.format(cur_f))
+        logging.debug('Encrypt: {0}'.format(enc_f))
 
         # TODO: Add transaction process.
         _copy(org_f, enc_f)
