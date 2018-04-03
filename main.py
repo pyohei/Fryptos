@@ -18,6 +18,9 @@ def main(src, dst):
     anchor = Anchor('text')
     for org_f in _read_files(src):
         cur_f = anchor.request_current_path(org_f)
+        # WARNING: Theoritically, encrypted files have very low possibility which 
+        #          have collision file name, and this script does not check duplicate 
+        #          file name.
         enc_f = _make_dest_dir(dst, _encrypt_file(org_f, anchor))
 
         logging.debug('cur: {0}, enc: {1}'.format(cur_f, enc_f))
@@ -39,13 +42,8 @@ def _read_files(file_path):
 
 
 def _encrypt_file(fname, anchor):
-    """Encrypt file name"""
-    # TODO: anchor object refere original path, so I can not check existing of 
-    #       encrypt file. And I need to change to look encrypt file in 'has' func.
-    f = filename.change(fname)
-    if anchor.has(f):
-        _encrypt_file(fname, anchor)
-    return f
+    """Encrypt file name."""
+    return filename.change(fname)
 
 
 def _make_dest_dir(public_dir, file_path):
@@ -64,7 +62,7 @@ def _delete(dst_dir, cur_f):
     delete_base_path = cur_f.replace(dst_dir.rstrip('/')+'/', '')
     delete_path = os.path.join(dst_dir, delete_base_path.split('/')[0])
     shutil.rmtree(delete_path)
-    logging.debug('Delete directory: {}'.format(delete_path))
+    logging.debug('Delete: {}'.format(delete_path))
 
 
 if __name__ == '__main__':

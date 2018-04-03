@@ -17,10 +17,6 @@ class Anchor(object):
             from text import Text as Record
         self.anchor = Record()
 
-    def has(self, filename):
-        """Check encrypt file name."""
-        return self.anchor.has(filename)
-
     def request_current_path(self, filename):
         """Load current encrypted filename"""
         return self.anchor.request_current_path(filename)
