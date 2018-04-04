@@ -7,3 +7,5 @@ tmp/*
 venv*
 
 anchor.csv
+
+test/dst/**/*.txt
