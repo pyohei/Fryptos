@@ -86,7 +86,7 @@ if __name__ == '__main__':
     dst = str(args.destination)
 
     if not (isdir(src) and isdir(dst)):
-        print 'No such directory.'
+        print('No such directory.')
         quit()
     
     verbose = args.verbose

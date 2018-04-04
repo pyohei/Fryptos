@@ -14,7 +14,7 @@ class Anchor(object):
         you must add new anc_way and new module.
         """
         if anc_way == 'text':
-            from text import Text as Record
+            from .text import Text as Record
         self.anchor = Record()
 
     def request_current_path(self, filename):
