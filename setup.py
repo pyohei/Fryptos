@@ -16,7 +16,7 @@ setup(name="fryptos",
               ],
           },
       licence='MIT',
-      # install_requires=[],
+      install_requires=[],
       # test_suite=''
       )
 
