@@ -9,3 +9,6 @@ venv*
 anchor.csv
 
 test/dst/**/*.txt
+
+build/*
+dist/*
