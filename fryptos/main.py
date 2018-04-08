@@ -68,7 +68,7 @@ def _delete(dst_dir, cur_f):
     logging.debug('Delete: {}'.format(delete_path))
 
 
-if __name__ == '__main__':
+def execute():
     import argparse
     from os.path import expanduser
     from os.path import isdir
@@ -95,3 +95,6 @@ if __name__ == '__main__':
         logging.basicConfig(level=10, format=log_format)
 
     main(src, dst)
+
+if __name__ == '__main__':
+    execute()
