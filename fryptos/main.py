@@ -85,8 +85,11 @@ def execute():
     src = str(args.source)
     dst = str(args.destination)
 
-    if not (isdir(src) and isdir(dst)):
-        print('No such directory.')
+    if not isdir(src):
+        print('No such directory \'{}\'.'.format(src))
+        quit()
+    if not isdir(dst):
+        print('No such directory \'{}\'.'.format(dst))
         quit()
     
     verbose = args.verbose
