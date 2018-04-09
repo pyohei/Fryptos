@@ -18,7 +18,7 @@ class Text(object):
     def _load(self):
         """Load anchor line."""
         if not os.path.exists(self.path):
-            return
+            return {}
         with open(self.path, 'r') as ff:
             a = {}
             for n in csv.DictReader(ff):
