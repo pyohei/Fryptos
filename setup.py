@@ -13,7 +13,7 @@ setup(name="fryptos",
       packages=['fryptos'],
       entry_points={
           'console_scripts': [
-              ],
+              'fryptos = fryptos.main:execute'],
           },
       license='MIT',
       install_requires=[],
