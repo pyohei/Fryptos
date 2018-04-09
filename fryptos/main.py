@@ -8,8 +8,8 @@ import glob
 import logging
 import os
 import shutil
-import filename
-from anchor.anchor import Anchor
+from . import filename
+from .anchor.anchor import Anchor
 
 
 def main(src, dst):
