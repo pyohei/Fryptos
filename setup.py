@@ -5,11 +5,14 @@ setup(name="fryptos",
       version='0.0.1',
       description='Encrypt files.',
       # long_description="",
-      # classifiers=[],
-      keywords='encrypt',
+      # TODO: Add classifiers.
+      classifiers=[
+          'Programming Language :: Python'
+         ],
+      keywords='encrypt file',
       author='Shohei Mukai',
       author_email='mukaishohei76@gmail.com',
-      py_modules=['main'],
+      url = 'https://github.com/pyohei/Fryptos',
       packages=['fryptos'],
       entry_points={
           'console_scripts': [
@@ -17,6 +20,5 @@ setup(name="fryptos",
           },
       license='MIT',
       install_requires=[],
-      # test_suite=''
       )
 
