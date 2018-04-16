@@ -1,9 +1,17 @@
 """Set up script"""
 from setuptools import setup
 
+def _create_long_desc():
+    """Create long description and README formatted with rst."""
+    _long_desc = ''
+    with open('README.rst', 'r') as rf:
+        return rf.read()
+long_desc = _create_long_desc()
+
 setup(name="fryptos",
       version='0.0.1',
       description='Encrypt files.',
+      long_description=long_desc,
       # long_description="",
       # TODO: Add classifiers.
       classifiers=[
