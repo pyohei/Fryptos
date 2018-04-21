@@ -9,9 +9,10 @@ def _create_long_desc():
 long_desc = _create_long_desc()
 
 setup(name="fryptos",
-      version='0.0.1',
+      version='0.0.3',
       description='Encrypt files.',
       long_description=long_desc,
+      long_description_content_type='text/markdown',
       # long_description="",
       # TODO: Add classifiers.
       classifiers=[
