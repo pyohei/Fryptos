@@ -4,7 +4,7 @@ from setuptools import setup
 def _create_long_desc():
     """Create long description and README formatted with rst."""
     _long_desc = ''
-    with open('README.rst', 'r') as rf:
+    with open('README.md', 'r') as rf:
         return rf.read()
 long_desc = _create_long_desc()
 
