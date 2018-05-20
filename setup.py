@@ -9,7 +9,7 @@ def _create_long_desc():
 long_desc = _create_long_desc()
 
 setup(name="fryptos",
-      version='0.0.4',
+      version='0.0.5',
       description='Encrypt files.',
       long_description=long_desc,
       long_description_content_type='text/markdown',
