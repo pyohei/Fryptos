@@ -4,12 +4,12 @@ from setuptools import setup
 def _create_long_desc():
     """Create long description and README formatted with rst."""
     _long_desc = ''
-    with open('README.md', 'r') as rf:
+    with open('README.rst', 'r') as rf:
         return rf.read()
 long_desc = _create_long_desc()
 
 setup(name="fryptos",
-      version='0.0.5',
+      version='0.0.7',
       description='Encrypt files.',
       long_description=long_desc,
       long_description_content_type='text/markdown',
