@@ -39,7 +39,6 @@ def _read_files(file_path):
     """Read all target files with generator."""
     for r, d, fs in os.walk(file_path):
         for f in fs:
-            print( os.path.join(r, f))
             yield os.path.join(r, f)
 
 
