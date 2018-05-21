@@ -8,8 +8,8 @@ import glob
 import logging
 import os
 import shutil
-from . import filename
-from .anchor.anchor import Anchor
+import filename
+from anchor.anchor import Anchor
 
 
 def main(src, dst):
@@ -37,11 +37,10 @@ def main(src, dst):
 
 def _read_files(file_path):
     """Read all target files with generator."""
-    files = glob.glob(file_path + '/*')
-    for f in files:
-        if os.path.isdir(f):
-            continue
-        yield f
+    for r, d, fs in os.walk(file_path):
+        for f in fs:
+            print( os.path.join(r, f))
+            yield os.path.join(r, f)
 
 
 def _encrypt_file(fname, anchor):
